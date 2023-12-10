@@ -21,9 +21,14 @@ public class InventoryController {
         try {
             inventoryService.reduceInventoryByAmount(inventoryId, count);
         } catch (UnsupportedOperationException e) {
+            // TODO need to reconsider on error return, so that there's a clear distinction compare to other unexpected error
+            // where is it more to notice on low inventory
             return ResponseEntity.internalServerError().body(e.getMessage());
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
+            log.error("Unexpected error: " + e.getMessage());
+            return ResponseEntity.internalServerError().body(e.getMessage());
         }
 
         return ResponseEntity.ok("Inventory book OK");
