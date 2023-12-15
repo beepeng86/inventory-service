@@ -2,6 +2,7 @@ package com.abp.inventoryservice.service;
 
 import com.abp.inventoryservice.model.Inventory;
 import com.abp.inventoryservice.repository.InventoryRepository;
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,13 @@ import org.springframework.stereotype.Service;
 public class InventoryServiceImpl implements InventoryService {
 
     private final InventoryRepository inventoryRepository;
+
+    @PostConstruct
+    public void insertSampleData() {
+        inventoryRepository.save(Inventory.builder().name("sample inventory 1").count(300L).build());
+        inventoryRepository.save(Inventory.builder().name("sample inventory 2").count(3L).build());
+        inventoryRepository.save(Inventory.builder().name("sample inventory 3").count(10L).build());
+    }
 
     @Override
     public void reduceInventoryByAmount(Long inventoryId, Long count) {
