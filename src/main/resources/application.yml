@@ -18,5 +18,11 @@ spring:
       settings:
         web-allow-others: true
       enabled: true
-
+logging:
+  file:
+    name: inventory-service.log
+  logback:
+    rollingpolicy:
+      file-name-pattern: inventory-service.%d{yyyy-MM-dd}.%i.gz
+      max-file-size: 1024KB
 debug: true
