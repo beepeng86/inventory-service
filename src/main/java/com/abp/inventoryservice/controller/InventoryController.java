@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/v1")
-// TODO: refactor to use the one in application yml
+@RequestMapping(value = "${inventory.baseUrl}")
 public class InventoryController {
     private final InventoryService inventoryService;
 
